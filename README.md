@@ -16,8 +16,7 @@ From "FirstSimpleTest.java":
         // By buttonBy = By.id(app_package_name + "addContactButton");
 
         // Button locator by 
-        // By buttonBy = By.xpath("//android.widget.Button[@content-desc=" +
-        + "'Add Contact']");
+        // By buttonBy = By.xpath("//android.widget.Button[@content-desc='Add Contact']");
 
         //Button locator by className
         By buttonBy = By.className("android.widget.Button");
