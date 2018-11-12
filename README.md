@@ -1,4 +1,4 @@
-## First Homework:
+﻿## First Homework:
 1.
 > Setup project that has been discussed in the class. 
 >Make sure you can run both tests (native and web) successfully.
@@ -39,6 +39,8 @@ When setting capabilities it is needed to change value of capaibility “deviceN
 - Type “adb devices” command into terminal in order to be sure that device is connected & to find out its identifier
 - Create or change existing capabilities set: type deviceName with the identifier of current device
 - Run appium session and run modified tests (deviceName in Capabilities)
+
+I don't have any Android device so I couldn't do it on practice
 
 5. 
 > What should be improved/changed in existing test code? Why, for what?
