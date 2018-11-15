@@ -7,10 +7,10 @@ import setup.Driver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-@Test(groups = "native", description = "Checks fields of Add Contact form")
+@Test(groups = "native")
 public class SimpleNativeTests extends Driver {
 
-    @Test(description = "This test clicks on button 'Add contact'")
+    @Test(description = "Checks fields of Add Contact form")
     public void SimplestTest() throws Exception {
         String app_package_name = "com.example.android.contactmanager:id/";
 

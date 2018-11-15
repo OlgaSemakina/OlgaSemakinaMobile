@@ -7,13 +7,15 @@ import setup.Driver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-@Test(groups = "web", description = "Opens site and checks it opens correctly")
+@Test(groups = "web")
 public class SimpleWebTests extends Driver {
 
     private String title = "Internet Assigned Numbers Authority";
 
-    @Test(description = "Open website")
+    @Test(description = "Opens site and checks it opens correctly")
     public void webTest() throws Exception {
+
+        // Go to the site
         driver().get(SUT);
 
         // Check url is correct
@@ -23,7 +25,6 @@ public class SimpleWebTests extends Driver {
         assertEquals(driver().getTitle() ,title);
 
         // Check http status code is 200
-//        assertTrue(new HttpResponseCode().httpResponseCodeViaGet(SUT) == 200);
         assertTrue(RestAssured.get(SUT).statusCode() == 200);
 
         System.out.println("Site opening done");
