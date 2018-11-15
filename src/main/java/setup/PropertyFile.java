@@ -1,6 +1,4 @@
-package enums;
-
-import java.util.Properties;
+package setup;
 
 public enum PropertyFile {
 
