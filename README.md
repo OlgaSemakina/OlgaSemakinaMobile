@@ -1,4 +1,4 @@
-## Third Homework: (#hw4)
+﻿## Third Homework: (#hw4)
 ### Run:
 Use test.xml to run tests, change name to "web" or "native" depending on your needs
 
@@ -42,6 +42,7 @@ See in "webtests.properties" and "Driver.java"
     ...
     capabilities.setCapability(MobileCapabilityType.UDID, UDID);
 ```
+
 Yes, test passed
 
 3. 
@@ -60,6 +61,8 @@ See in "nativetests.properties" and "Driver.java"
     ...
     capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
 ```
+
+Yes, test passed
 
 4.
 > What’s wrong with our code? How to fix/improve it? Implement your suggestions.
