@@ -19,7 +19,7 @@ public class SimpleWebTests extends Driver {
         driver().get(SUT);
 
         // Check url is correct
-        assertEquals(SUT + "/", driver().getCurrentUrl());
+        assertEquals(driver().getCurrentUrl(), SUT + "/");
 
         // Check title is correct
         assertEquals(driver().getTitle() ,title);

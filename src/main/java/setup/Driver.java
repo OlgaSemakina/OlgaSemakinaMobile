@@ -1,6 +1,7 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,6 +24,11 @@ public class Driver extends TestProperties {
     protected static String SUT; // site under testing
     protected static String TEST_PLATFORM;
     protected static String DRIVER;
+    protected static String DEVICE_NAME;
+    protected static String UDID;
+    protected static String APP_PACKAGE;
+    protected static String APP_ACTIVITY;
+
 
     /**
      * Initialize driver with appropriate capabilities depending on platform and application
@@ -35,18 +41,25 @@ public class Driver extends TestProperties {
 
         AUT = getProperty("aut");
         String t_sut = getProperty("sut");
-        SUT = t_sut == null ? null : "http://" + t_sut;
+        SUT = t_sut == null ? null : "https://" + t_sut;
         TEST_PLATFORM = getProperty("platform");
         DRIVER = getProperty("driver");
+        DEVICE_NAME = getProperty("deviceName");
+        UDID = getProperty("udid");
+        APP_PACKAGE = getProperty("appPackage");
+        APP_ACTIVITY = getProperty("appActivity");
 
         // Setup test platform: Android or iOS. Browser also depends on a platform.
         switch (TEST_PLATFORM) {
             case "Android":
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
                 browserName = "Chrome";
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
+                capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, APP_PACKAGE);
+                capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, APP_ACTIVITY);
                 break;
             case "iOS":
                 browserName = "Safari";
+                capabilities.setCapability(MobileCapabilityType.UDID, UDID);
                 break;
             default:
                 throw new Exception("Unknown mobile platform");

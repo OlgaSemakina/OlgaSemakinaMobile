@@ -1,4 +1,4 @@
-## Second Homework: (#hw3)
+## Third Homework: (#hw4)
 ### Run:
 Use test.xml to run tests, change name to "web" or "native" depending on your needs
 
@@ -9,44 +9,62 @@ Use test.xml to run tests, change name to "web" or "native" depending on your ne
 ```
 
 1.
-> Rewrite (complete) Driver using “singleton” pattern. Are there any advantages?
+> Add support of appPackage and appActivity parameters for Android devices (reading from a .properties file and then setting in the DesiredCapabilities). Locally installed Appium DT has no need in these parameters, but for Appium server of Minsk Mobile Farm it’s mandatory.
 
-If we use “singleton” pattern for Driver we have only one instance of it for the whole program. Therefore it’s not going to happen so that we use different instances of driver, staying attached to this particular driver 
+"nativetests.properties":
+```sh
+    appPackage=com.example.android.contactmanager
+    appActivity=.ContactManager
+```
+
+"Driver.java":
+```sh
+    APP_PACKAGE = getProperty("appPackage");
+    APP_ACTIVITY = getProperty("appActivity");
+    ...
+    capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, APP_PACKAGE);
+    capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, APP_ACTIVITY);
+```
 
 2. 
-> Suggest improvements for .properties reading. What are the purposes?
+> Change settings to run web test on a certain iOS device on Mobile Test Farm. Run test with your changes. Did test pass?
 
-- We need property file in order to easy change capabilities for different kind of devices
-- We split properties into two parts: for web and native tests. 
-- We use enum PropertyFIle so that we don’t have hardcoded values of properties path
-- We keep string that contains current property file and read data from it
+See in "webtests.properties" and "Driver.java"
+"webtests.properties":
+```sh
+    platform=iOS
+    udid=25ad632db73b1de523be6565f395cae349b4dd13
+```
+
+"Driver.java":
+```sh
+    UDID = getProperty("udid");
+    ...
+    capabilities.setCapability(MobileCapabilityType.UDID, UDID);
+```
+Yes, test passed
 
 3. 
-> Add checks of other fields and their titles (Contact Name, Contact phone) in “native” test
+> Change settings to run native test on a certain/random Android device on Mobile Test Farm. Run test with your changes. Did test pass?
 
-Example from "SimpleNativeTest.java":
+See in "nativetests.properties" and "Driver.java"
+"nativetests.properties":
 ```sh
-        // Check title "Target Account"
-        buttonBy = By.xpath("//android.widget.TextView[@content-desc='Target Account']");
-        assertEquals(driver().findElement(buttonBy).getText(), "Target Account");
-
-        // Check text field for "Target Account" is displayed
-        buttonBy = By.id(app_package_name + "accountSpinner");
-        assertTrue(driver().findElement(buttonBy).isDisplayed());
+    platform=Android
+    deviceName=LGE Nexus 5
 ```
-Other checks are in "SimpleNativeTest.java"
+
+"Driver.java":
+```sh
+    DEVICE_NAME = getProperty("deviceName");
+    ...
+    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
+```
 
 4.
-> **Optional**: Add keyboard presence check  in “native” test.
+> What’s wrong with our code? How to fix/improve it? Implement your suggestions.
 
-I have found out that we have an exception if the keyboard is hidden and we try to hide it with driver().hideKeyboard(), but couldn't do it properly
+- We can use Page Objects Pattern
+- We can use xml instead of .properties in order to make cross-platform tests (for now we have webtest.properties with settings for iOS and nativetests.properties for Android)
+- In native tests we can use @AndroidFindBy and @iOSFindBy annotations in addition to standard @FindBy to make code cross-platform
 
-5. 
-> Which checks would you place in the “web” test?
-
-I would check title, url and http-code.
-
-6. 
-> Implement checks for “web” test in code and try to use.
-
-In "SimpleWebTests.java"
