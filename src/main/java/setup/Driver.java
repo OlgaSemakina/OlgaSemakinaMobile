@@ -20,7 +20,6 @@ public class Driver extends TestProperties {
     protected DesiredCapabilities capabilities;
 
     // Properties to be read
-    protected static String AUT; // app under testing
     protected static String SUT; // site under testing
     protected static String TEST_PLATFORM;
     protected static String DRIVER;
@@ -39,7 +38,6 @@ public class Driver extends TestProperties {
         capabilities = new DesiredCapabilities();
         String browserName;
 
-        AUT = getProperty("aut");
         String t_sut = getProperty("sut");
         SUT = t_sut == null ? null : "https://" + t_sut;
         TEST_PLATFORM = getProperty("platform");
@@ -54,8 +52,7 @@ public class Driver extends TestProperties {
             case "Android":
                 browserName = "Chrome";
                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
-                capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, APP_PACKAGE);
-                capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, APP_ACTIVITY);
+
                 break;
             case "iOS":
                 browserName = "Safari";
@@ -69,8 +66,8 @@ public class Driver extends TestProperties {
         // Setup type of application: mobile, web
         if (AUT != null && SUT == null) {
             // Native
-            File app = new File(AUT);
-            capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+            capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, APP_PACKAGE);
+            capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, APP_ACTIVITY);
         } else if (SUT != null && AUT == null) {
             // Web
             capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
