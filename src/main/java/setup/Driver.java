@@ -64,11 +64,11 @@ public class Driver extends TestProperties {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, TEST_PLATFORM);
 
         // Setup type of application: mobile, web
-        if (AUT != null && SUT == null) {
+        if (APP_PACKAGE != null && APP_ACTIVITY != null && SUT == null) {
             // Native
             capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, APP_PACKAGE);
             capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, APP_ACTIVITY);
-        } else if (SUT != null && AUT == null) {
+        } else if (SUT != null && APP_PACKAGE == null && APP_ACTIVITY == null) {
             // Web
             capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
         } else {
